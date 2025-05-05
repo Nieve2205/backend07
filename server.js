@@ -3,6 +3,7 @@ import cors from 'cors';
 import db from './app/models/index.js';
 import authRoutes from './app/routes/auth.routes.js';
 import userRoutes from './app/routes/user.routes.js';
+require('dotenv').config();
 
 const app = express();
 
