@@ -1,4 +1,34 @@
-node_modules
-frontend-jwt/node_modules
-frontend-jwt/build
+# Node.js
+node_modules/
+npm-debug.log
 .env
+
+# Logs
+logs/
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Sequelize (si usas migrations o seeders)
+migrations/
+seeders/
+
+# React frontend
+frontend-jwt/node_modules/
+frontend-jwt/build/
+
+# Optional: macOS .AppleDouble files
+.AppleDouble
+
+# Optional: archivo de estado de lockfile yarn/npm
+package-lock.json
+yarn.lock
