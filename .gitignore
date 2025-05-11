@@ -1,0 +1,4 @@
+node_modules
+frontend-jwt/node_modules
+frontend-jwt/build
+.env

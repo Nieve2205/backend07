@@ -1,24 +1,21 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import db from './app/models/index.js';
 import authRoutes from './app/routes/auth.routes.js';
 import userRoutes from './app/routes/user.routes.js';
-require('dotenv').config();
 
 const app = express();
 
-// Configuración CORS actualizada
+// --- Configuración CORS ---
 const allowedOrigins = [
-  'http://localhost:8080', // Original
-  'http://localhost:3002', // Tu frontend React
-  'http://localhost:3000'  // Por si acaso
+  'http://localhost:3000'
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Permitir solicitudes sin origen (como Postman)
     if (!origin) return callback(null, true);
-    
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -34,18 +31,23 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rutas
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the Node.js JWT Authentication API.' });
-});
-
+// --- Rutas API ---
 app.use('/api/auth', authRoutes);
 app.use('/api/test', userRoutes);
 
-// Puerto
-const PORT = process.env.PORT || 3000;
+// --- Servir frontend React (client/build) ---
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Iniciar servidor
+app.use(express.static(path.join(__dirname, 'frontend-jwt/build')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend-jwt/build', 'index.js'));
+});
+
+// --- Puerto e inicio de servidor ---
+const PORT = process.env.PORT || 3001;
+
 db.sequelize.sync({ force: false })
   .then(() => {
     console.log("Database synchronized");
