@@ -10,7 +10,7 @@ const app = express();
 
 // --- Configuración CORS ---
 const allowedOrigins = [
-  'http://localhost:3000'
+  'https://frontend07.onrender.com'
 ];
 
 const corsOptions = {
