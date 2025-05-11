@@ -1,14 +1,25 @@
-export default {
-    HOST: process.env.DB_HOST || "localhost",
-    USER: process.env.DB_USER || "root",
-    PASSWORD: process.env.DB_PASSWORD || null, 
-    DB: process.env.DB_NAME || "db",
-    PORT: process.env.DB_PORT || 3306,
-    dialect: "mysql",
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
+const isProduction = process.env.NODE_ENV === 'production';
+
+const config = isProduction
+  ? {
+      url: process.env.DATABASE_URL,
+      dialect: 'postgres',
     }
+  : {
+      HOST: 'localhost',
+      USER: 'root',
+      PASSWORD: '',
+      DB: 'db',
+      PORT: 3306,
+      dialect: 'mysql',
+    };
+
+export default {
+  ...config,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
 };
