@@ -1,7 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import db from './app/models/index.js';
 import authRoutes from './app/routes/auth.routes.js';
 import userRoutes from './app/routes/user.routes.js';
@@ -34,6 +32,11 @@ app.use(express.urlencoded({ extended: true }));
 // --- Rutas API ---
 app.use('/api/auth', authRoutes);
 app.use('/api/test', userRoutes);
+
+// --- Ruta por defecto para rutas no definidas ---
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'Ruta no encontrada' });
+});
 
 // --- Puerto e inicio de servidor ---
 const PORT = process.env.PORT || 3001;
