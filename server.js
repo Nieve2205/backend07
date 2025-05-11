@@ -35,16 +35,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api/test', userRoutes);
 
-// --- Servir frontend React (client/build) ---
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(express.static(path.join(__dirname, 'frontend-jwt/build')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend-jwt/build', 'index.js'));
-});
-
 // --- Puerto e inicio de servidor ---
 const PORT = process.env.PORT || 3001;
 
