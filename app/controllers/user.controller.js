@@ -1,4 +1,4 @@
-import db from "../models";
+import db from '../models/index.js';
 
 export const allAccess = (req, res) => {
     res.status(200).send("Public Content.");
