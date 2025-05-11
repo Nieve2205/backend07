@@ -2,7 +2,8 @@ import express from 'express';
 import { allAccess, 
     userBoard, 
     adminBoard, 
-    moderatorBoard } 
+    moderatorBoard,
+    getAllUsers } 
     from '../controllers/user.controller.js';
 import { verifyToken, 
     isAdmin, 
