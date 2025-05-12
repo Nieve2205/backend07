@@ -1,5 +1,6 @@
 import db from '../models/index.js';
-const { user: User, role: Role } = db;
+const roles = await db.role.findAll();
+console.log(roles);
 
 export const allAccess = (req, res) => {
     res.status(200).send("Public Content.");
