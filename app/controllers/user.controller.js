@@ -27,22 +27,20 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-export const setUserRole = async (req, res) => {
-    const { userId, roleId } = req.body;
+export const assignRole = async (req, res) => {
+  const { userId, roleName } = req.body;
 
-    try {
-        const user = await User.findByPk(userId);
-        if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
+  try {
+    const user = await db.user.findByPk(userId);
+    if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
 
-        const role = await Role.findByPk(roleId);
-        if (!role) return res.status(404).json({ message: "Rol no encontrado" });
+    const role = await db.role.findOne({ where: { name: roleName } });
+    if (!role) return res.status(404).json({ message: "Rol no encontrado" });
 
-        await user.setRoles([role.id]);
+    await user.setRoles([role.id]);
 
-        return res.status(200).json({ message: "Rol actualizado correctamente" });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Error al actualizar el rol" });
-    }
+    return res.json({ message: "Rol asignado correctamente" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 };
-

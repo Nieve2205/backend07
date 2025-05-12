@@ -4,7 +4,7 @@ import { allAccess,
     adminBoard, 
     moderatorBoard,
     getAllUsers,
-    setUserRole } 
+    assignRole } 
     from '../controllers/user.controller.js';
 import { verifyToken, 
     isAdmin, 
@@ -19,6 +19,6 @@ router.get('/mod', [verifyToken, isModerator], moderatorBoard);
 router.get('/admin', [verifyToken, isAdmin], adminBoard);
 router.get('/users', getAllUsers);
 
-router.post('/set-role', setUserRole); 
+router.post('/set-role', assignRole); 
 
 export default router;
