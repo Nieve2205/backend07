@@ -3,7 +3,8 @@ import { allAccess,
     userBoard, 
     adminBoard, 
     moderatorBoard,
-    getAllUsers } 
+    getAllUsers,
+    setUserRole } 
     from '../controllers/user.controller.js';
 import { verifyToken, 
     isAdmin, 
