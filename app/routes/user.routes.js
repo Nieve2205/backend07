@@ -16,6 +16,8 @@ router.get('/all', allAccess);
 router.get('/user', [verifyToken], userBoard);
 router.get('/mod', [verifyToken, isModerator], moderatorBoard);
 router.get('/admin', [verifyToken, isAdmin], adminBoard);
-router.get('/users', [verifyToken, isAdmin], getAllUsers);
+router.get('/users', getAllUsers);
+
+router.post('/set-role', setUserRole); 
 
 export default router;
