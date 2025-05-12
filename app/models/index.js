@@ -3,6 +3,8 @@ import dbConfig from "../config/db.config.js";
 import userModel from "./user.model.js";
 import roleModel from "./role.model.js";
 
+const roles = ['user', 'admin', 'moderator'];
+
 let sequelize;
 
 if (dbConfig.url) {

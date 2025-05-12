@@ -1,7 +1,16 @@
 import db from '../models/index.js';
 const roles = await db.role.findAll();
 console.log(roles);
-
+for (let roleName of roles) {
+  const roleExists = await db.role.findOne({ where: { name: roleName } });
+  
+  if (!roleExists) {
+    await db.role.create({ name: roleName });
+    console.log(`Rol ${roleName} creado`);
+  } else {
+    console.log(`El rol ${roleName} ya existe`);
+  }
+}
 export const allAccess = (req, res) => {
     res.status(200).send("Public Content.");
 };
