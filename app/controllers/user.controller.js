@@ -28,13 +28,13 @@ export const getAllUsers = async (req, res) => {
 };
 
 export const setUserRole = async (req, res) => {
-    const { userId, roleName } = req.body;
+    const { userId, roleId } = req.body;
 
     try {
         const user = await User.findByPk(userId);
         if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
 
-        const role = await Role.findOne({ where: { name: roleName } });
+        const role = await Role.findByPk(roleId);
         if (!role) return res.status(404).json({ message: "Rol no encontrado" });
 
         await user.setRoles([role.id]);
